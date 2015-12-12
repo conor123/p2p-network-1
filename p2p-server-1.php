@@ -20,12 +20,13 @@ $alt_ip_address = "192.168.75.186";
 
 $port = 1337;
 // Socket resource
-$server = stream_socket_server("tcp://$my_ip_address:$port", $errno, $errorMessage);
+$server = stream_socket_server("tcp://$alt_ip_address:$port", $errno, $errorMessage);
 
 
 echo "\n>>> Reporting for duty\n\n";
 
-echo "> My IP: " . $my_ip_address . PHP_EOL;
+//echo "> My IP: " . $my_ip_address . PHP_EOL;
+echo "> My Alt IP: " . $alt_ip_address . PHP_EOL;
 
 /*
 * Code
@@ -48,6 +49,7 @@ for (;;) {
         
 	echo "> Message Received from Client" . PHP_EOL;
 	$sock_data = fread($client, 1024);
+	echo $sock_data . PHP_EOL;
 	echo "> Message Complete" . PHP_EOL;
 	//echo fwrite($client, "Hello! The time is ".date("n/j/Y g:i a")."\n");
         //echo stream_copy_to_stream($client, $client) . PHP_EOL;
