@@ -11,6 +11,7 @@
 require "lib/functions/ip.functions.php";
 require "lib/functions/socket.functions.php";
 require "lib/functions/print.functions.php";
+require "lib/functions/network.functions.php";
 
 define("VERSION", "V0.1.0");
 
@@ -26,6 +27,12 @@ $server_socket = stream_socket_server("tcp://$my_ip_address:$port", $errno, $err
 
 $client_message = "";
 
+$network_devices_by_ip = array();
+
+$blocked_network_devices_by_ip = array();
+
+$authentication_token = "Password1";
+
 /*
 * Program
 */
@@ -37,7 +44,16 @@ while($server_on){
 
 	$client_message = listen_for_client($server_socket);
 
-	print_message($client_message);
+	if ($client_message) {
+
+		//print_message($client_message);
+
+		process_client_message($client_message);
+	}
+
+	//var_dump($network_devices_by_ip);
+
+	display_network_devices();
 	
 }
 
