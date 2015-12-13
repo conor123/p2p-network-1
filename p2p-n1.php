@@ -3,7 +3,7 @@
 * P2P N1 Test
 */
 
-require 'lib/ip.functions.php';
+require 'lib/functions/ip.functions.php';
 
 
 /*
