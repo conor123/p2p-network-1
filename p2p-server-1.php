@@ -65,7 +65,18 @@ for (;;) {
         echo "> Counter is 0: " . PHP_EOL;
         $counter_1++;
 
-        exec("curl --data $my_message 192.168.75.187:1337");
+        $sock = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+
+        echo "> Connecting to socket: " . PHP_EOL;
+        $sockconnect = socket_connect($sock, $peer, $port);
+
+        $msg = '<test>Xml data</test>';
+
+        echo "> Writing to socket: " . PHP_EOL;
+        socket_write($sock, $msg, strlen($msg));
+        socket_close($sock);
+
+        //exec("curl --data $my_message 192.168.75.187:1337");
 
         continue;
 
@@ -83,7 +94,7 @@ for (;;) {
 	$sock_data = fread($client, 1024);
 	echo $sock_data . PHP_EOL;
     //echo json_decode($sock_data) . PHP_EOL;
-	echo "> Message Complete" . PHP_EOL;
+	echo "> Message Received. Over." . PHP_EOL;
 	//echo fwrite($client, "Hello! The time is ".date("n/j/Y g:i a")."\n");
         //echo stream_copy_to_stream($client, $client) . PHP_EOL;
 	//$pkt = stream_socket_recvfrom($client, 1, 0, $peer);
