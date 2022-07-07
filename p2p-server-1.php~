@@ -49,7 +49,7 @@ for (;;) {
         
 	echo "> Message Received from Client" . PHP_EOL;
 	$sock_data = fread($client, 1024);
-	echo $sock_date . PHP_EOL;
+	echo $sock_data . PHP_EOL;
 	echo "> Message Complete" . PHP_EOL;
 	//echo fwrite($client, "Hello! The time is ".date("n/j/Y g:i a")."\n");
         //echo stream_copy_to_stream($client, $client) . PHP_EOL;
